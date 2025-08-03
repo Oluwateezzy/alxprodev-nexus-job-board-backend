@@ -2,25 +2,13 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+from core.permissions import IsAdmin, IsEmployer, IsOwner
 from .models import *
 from .serializers import *
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
-
-
-class IsAdmin(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user.role == Role.ADMIN
-
-
-class IsEmployer(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user.role == Role.EMPLOYER
-
-
-class IsOwner(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        return obj.user == request.user
+from auth.models import Role
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -92,6 +80,13 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = ApplicationSerializer
 
     def get_queryset(self):
+        # Handle schema generation (when user is AnonymousUser)
+        if (
+            getattr(self, "swagger_fake_view", False)
+            or not self.request.user.is_authenticated
+        ):
+            return super().get_queryset()
+
         # Employers see applications for their jobs
         if self.request.user.role == Role.EMPLOYER:
             return (
@@ -120,6 +115,13 @@ class BookmarkViewSet(viewsets.ModelViewSet):
     serializer_class = BookmarkSerializer
 
     def get_queryset(self):
+        # Handle schema generation (when user is AnonymousUser)
+        if (
+            getattr(self, "swagger_fake_view", False)
+            or not self.request.user.is_authenticated
+        ):
+            return super().get_queryset()
+
         return super().get_queryset().filter(user=self.request.user)
 
     def get_permissions(self):

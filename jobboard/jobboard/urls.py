@@ -11,14 +11,14 @@ schema_view = get_schema_view(
         default_version="v1",
         description="API documentation for Job Board Platform",
     ),
-    # public=True,
-    # permission_classes=[permissions.AllowAny],
+    public=True,
+    permission_classes=[permissions.AllowAny],
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/auth/", include("auth.urls")),
     path("api/", include("jobs.urls")),
-    path("api/auth/", include("rest_framework.urls")),
     path(
         "api/docs/",
         schema_view.with_ui("swagger", cache_timeout=0),

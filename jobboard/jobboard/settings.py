@@ -31,6 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = "custom_auth.User"
+
 
 # Application definition
 
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "django_filters",
     "jobs",
+    "auth.apps.AuthConfig",
 ]
 
 # REST Framework configuration

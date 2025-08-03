@@ -2,21 +2,10 @@
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth import get_user_model
+from auth.models import Role
+from auth.serializers import UserSerializer
 
 User = get_user_model()
-
-
-class UserSerializer(serializers.ModelSerializer):
-    role = serializers.ChoiceField(choices=Role.choices)
-
-    class Meta:
-        model = User
-        fields = ["id", "email", "role", "is_verified", "date_joined"]
-        extra_kwargs = {
-            "password": {"write_only": True},
-            "is_verified": {"read_only": True},
-            "date_joined": {"read_only": True},
-        }
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
