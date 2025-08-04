@@ -18,7 +18,7 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
 
     def get_permissions(self):
-        if self.action in ["create", "update", "partial_update", "destroy"]:
+        if self.action in ["create", "update", "destroy"]:
             permission_classes = [permissions.IsAuthenticated, IsEmployer | IsAdmin]
         else:
             permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -35,7 +35,7 @@ class JobPostingViewSet(viewsets.ModelViewSet):
     filterset_fields = ["employment_type", "location_type", "city", "country", "status"]
 
     def get_permissions(self):
-        if self.action in ["create", "update", "partial_update", "destroy"]:
+        if self.action in ["create", "partial_update", "destroy"]:
             permission_classes = [permissions.IsAuthenticated, IsEmployer | IsAdmin]
         else:
             permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -102,7 +102,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action in ["create"]:
             permission_classes = [permissions.IsAuthenticated]
-        elif self.action in ["update", "partial_update", "destroy"]:
+        elif self.action in ["partial_update", "destroy"]:
             permission_classes = [permissions.IsAuthenticated, IsOwner | IsAdmin]
         else:
             permission_classes = [permissions.IsAuthenticated]
