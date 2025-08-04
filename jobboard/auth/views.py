@@ -1,5 +1,7 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics, permissions
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from .serializers import (
     CustomTokenObtainPairSerializer,
     RegisterSerializer,
@@ -19,6 +21,27 @@ class RegisterView(generics.CreateAPIView):
 class UserProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    @swagger_auto_schema(
+        operation_description="Get or update user profile",
+        security=[{'Bearer': []}]
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Update user profile",
+        security=[{'Bearer': []}]
+    )
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Partially update user profile",
+        security=[{'Bearer': []}]
+    )
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
 
     def get_object(self):
         return self.request.user

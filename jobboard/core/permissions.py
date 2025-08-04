@@ -4,12 +4,12 @@ from auth.models import Role
 
 class IsAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.role == Role.ADMIN
+        return request.user.is_authenticated and request.user.role == Role.ADMIN
 
 
 class IsEmployer(permissions.BasePermission):
     def has_permission(self, request, view):
-        return request.user.role == Role.EMPLOYER
+        return request.user.is_authenticated and request.user.role == Role.EMPLOYER
 
 
 class IsOwner(permissions.BasePermission):

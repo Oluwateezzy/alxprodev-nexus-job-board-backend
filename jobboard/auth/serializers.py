@@ -15,6 +15,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'email'
+    
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)

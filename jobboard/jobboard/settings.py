@@ -33,6 +33,12 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "custom_auth.User"
 
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'auth.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 # Application definition
 
@@ -66,6 +72,27 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+# Swagger settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"'
+        }
+    },
+    'USE_SESSION_AUTH': False,
+    'JSON_EDITOR': True,
+    'SUPPORTED_SUBMIT_METHODS': [
+        'get',
+        'post',
+        'put',
+        'delete',
+        'patch'
+    ],
+}
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -95,17 +122,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "jobboard.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
@@ -148,6 +164,11 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Authentication settings
+LOGIN_URL = '/api/auth/login/'
+LOGIN_REDIRECT_URL = '/api/docs/'
+LOGOUT_REDIRECT_URL = '/api/docs/'
 
 load_dotenv()
 
