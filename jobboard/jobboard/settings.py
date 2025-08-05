@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-_kfk_8*(h_x$^3%+z)!=!ri+dsvr_n@=)1=9rjds2lu9h4%a!m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "custom_auth.User"
 
@@ -182,3 +182,6 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
     }
 }
+
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
