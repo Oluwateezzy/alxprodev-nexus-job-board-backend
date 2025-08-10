@@ -24,21 +24,13 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
     @swagger_auto_schema(
         operation_description="Get or update user profile",
-        security=[{'Bearer': []}]
+        security=[{"Bearer": []}],
     )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        operation_description="Update user profile",
-        security=[{'Bearer': []}]
-    )
-    def put(self, request, *args, **kwargs):
-        return super().put(request, *args, **kwargs)
-
-    @swagger_auto_schema(
-        operation_description="Partially update user profile",
-        security=[{'Bearer': []}]
+        operation_description=" update user profile", security=[{"Bearer": []}]
     )
     def patch(self, request, *args, **kwargs):
         return super().patch(request, *args, **kwargs)
