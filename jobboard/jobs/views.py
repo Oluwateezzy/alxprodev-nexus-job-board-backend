@@ -16,6 +16,7 @@ from auth.models import Role
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
+    http_method_names = ["get", "post", "put", "delete"]
 
     def get_permissions(self):
         if self.action in ["create", "update", "destroy"]:
@@ -32,6 +33,8 @@ class JobPostingViewSet(viewsets.ModelViewSet):
     queryset = JobPosting.objects.all()
     serializer_class = JobPostingSerializer
     filter_backends = [DjangoFilterBackend]
+    http_method_names = ["get", "post", "PATCH", "delete"]
+
     filterset_fields = ["employment_type", "location_type", "city", "country", "status"]
 
     def get_permissions(self):
@@ -80,6 +83,7 @@ class JobPostingViewSet(viewsets.ModelViewSet):
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
+    http_method_names = ["get", "post", "PATCH", "delete"]
 
     def get_queryset(self):
         # Handle schema generation (when user is AnonymousUser)
@@ -115,6 +119,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 class BookmarkViewSet(viewsets.ModelViewSet):
     queryset = Bookmark.objects.all()
     serializer_class = BookmarkSerializer
+    http_method_names = ["get", "post", "PATCH", "delete"]
 
     def get_queryset(self):
         # Handle schema generation (when user is AnonymousUser)
