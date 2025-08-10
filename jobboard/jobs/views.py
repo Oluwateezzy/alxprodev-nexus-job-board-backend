@@ -33,7 +33,7 @@ class JobPostingViewSet(viewsets.ModelViewSet):
     queryset = JobPosting.objects.all()
     serializer_class = JobPostingSerializer
     filter_backends = [DjangoFilterBackend]
-    http_method_names = ["get", "post", "PATCH", "delete"]
+    http_method_names = ["get", "post", "patch", "delete"]
 
     filterset_fields = ["employment_type", "location_type", "city", "country", "status"]
 
@@ -83,7 +83,7 @@ class JobPostingViewSet(viewsets.ModelViewSet):
 class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
-    http_method_names = ["get", "post", "PATCH", "delete"]
+    http_method_names = ["get", "post", "patch", "delete"]
 
     def get_queryset(self):
         # Handle schema generation (when user is AnonymousUser)
@@ -119,7 +119,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 class BookmarkViewSet(viewsets.ModelViewSet):
     queryset = Bookmark.objects.all()
     serializer_class = BookmarkSerializer
-    http_method_names = ["get", "post", "PATCH", "delete"]
+    http_method_names = ["get", "post", "patch", "delete"]
 
     def get_queryset(self):
         # Handle schema generation (when user is AnonymousUser)

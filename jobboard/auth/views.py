@@ -21,6 +21,7 @@ class RegisterView(generics.CreateAPIView):
 class UserProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    http_method_names = ["get", "post", "patch", "delete"]
 
     @swagger_auto_schema(
         operation_description="Get or update user profile",
