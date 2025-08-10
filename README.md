@@ -60,7 +60,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 ### 3. Install Dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r jobboard/requirements.txt
 ```
 
 ### 4. Database Configuration
