@@ -48,8 +48,8 @@ A robust Django REST Framework backend for a job board platform featuring role-b
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
-cd jobboard-backend
+git clone https://github.com/Oluwateezzy/alxprodev-nexus-job-board-backend
+cd alxprodev-nexus-job-board-backend
 ```
 
 ### 2. Create Virtual Environment
@@ -86,10 +86,11 @@ DATABASES = {
 Create a `.env` file in the project root:
 
 ```env
-SECRET_KEY=your-secret-key-here
-DEBUG=True
-DATABASE_URL=postgresql://username:password@localhost:5432/jobboard_db
-JWT_SECRET_KEY=your-jwt-secret-key
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
 ```
 
 ### 6. Run Migrations
@@ -108,12 +109,11 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-The API will be available at `http://localhost:8000/api/`
-
+The API will be available at `https://alxprodev-nexus-job-board-backend.onrender.com/api/`
 ## 📖 API Documentation
 
 ### Interactive Documentation
-Visit `http://localhost:8000/api/docs/` for interactive Swagger documentation.
+Visit `https://alxprodev-nexus-job-board-backend.onrender.com/api/docs` for interactive Swagger documentation.
 
 ### Authentication Endpoints
 
@@ -230,45 +230,6 @@ GET /api/jobs/?employment_type=FULL_TIME&location_type=REMOTE&city=Lagos&country
 # Only application owners can view their applications
 ```
 
-## 🚀 Deployment
-
-### Using Docker (Recommended)
-
-1. Create `Dockerfile`:
-```dockerfile
-FROM python:3.9
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-CMD ["gunicorn", "jobboard.wsgi:application", "--bind", "0.0.0.0:8000"]
-```
-
-2. Create `docker-compose.yml`:
-```yaml
-version: '3.8'
-services:
-  web:
-    build: .
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/jobboard
-  
-  db:
-    image: postgres:13
-    environment:
-      - POSTGRES_DB=jobboard
-      - POSTGRES_PASSWORD=password
-```
-
-3. Deploy:
-```bash
-docker-compose up --build
-```
-
 ### Manual Deployment
 
 1. Set up production database
@@ -276,19 +237,6 @@ docker-compose up --build
 3. Collect static files: `python manage.py collectstatic`
 4. Use a WSGI server like Gunicorn
 5. Set up reverse proxy (Nginx recommended)
-
-## 🧪 Testing
-
-Run the test suite:
-```bash
-python manage.py test
-```
-
-For coverage report:
-```bash
-coverage run --source='.' manage.py test
-coverage report
-```
 
 ## 📊 Performance Optimization
 
@@ -305,24 +253,6 @@ The project includes optimized database indexes for:
 - Prefetch related for many-to-many relationships
 - Efficient pagination
 - Cached query results where appropriate
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Commit Convention
-```
-feat: add new feature
-fix: bug fix
-docs: documentation changes
-perf: performance improvements
-refactor: code refactoring
-test: add tests
-```
 
 ## 📝 API Response Examples
 
@@ -366,11 +296,7 @@ test: add tests
 
 ## 📞 Support
 
-For support, email support@jobboard.com or create an issue in the repository.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+For support, create an issue in the repository.
 
 ## 🙏 Acknowledgments
 
