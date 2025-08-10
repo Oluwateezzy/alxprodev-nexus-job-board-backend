@@ -48,7 +48,7 @@ A robust Django REST Framework backend for a job board platform featuring role-b
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Oluwateezzy/alxprodev-nexus-job-board-backend
+git clone https://github.com/Oluwateezzy/alxprodev-nexus-job-board-backend.git
 cd alxprodev-nexus-job-board-backend
 ```
 
